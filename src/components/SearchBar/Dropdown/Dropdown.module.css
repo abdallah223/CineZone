@@ -1,0 +1,60 @@
+/* Custom dropdown styles */
+.dropdownContainer {
+    position: relative;
+    min-width: 100px;
+    font-family: Arial, sans-serif;
+}
+
+.dropdownToggle {
+    background-color: transparent;
+    border-left: 1px solid var(--main-color);
+    padding: 4px 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+
+.dropdownLabel {
+    color: var(--main-text-color);
+    font-size: 14px;
+}
+
+.dropdownArrow {
+    color: var(--main-text-color);
+    width: 16px;
+    height: 16px;
+    transition: transform 0.2s;
+}
+
+.dropdownArrowOpen {
+    transform: rotate(180deg);
+}
+
+.dropdownMenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 8px;
+    background-color: rgba(65, 72, 81, 0.8);
+    ;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 100;
+}
+
+.dropdownOption {
+    padding: 8px;
+    color: var(--main-text-color);
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.dropdownOption:hover {
+    background-color: var(--main-color);
+}

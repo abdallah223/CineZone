@@ -1,0 +1,79 @@
+.searchBarContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.searchBar:focus-within {
+    outline: 1px solid var(--main-color);
+}
+
+.searchBar {
+    position: relative;
+    color: var(--main-text-color);
+    padding: 6px 12px;
+    border-radius: 15px;
+    background-color: rgba(65, 72, 81, 0.7);
+    transition: 0.2s all ease;
+}
+
+
+
+
+.searchBar form {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    justify-content: center;
+}
+
+.searchBar form input {
+    padding: 4px;
+    flex: 1 0 250px
+}
+
+.searchBar form input::placeholder {
+    color: var(--secondry-text-color);
+}
+
+.searchBar form>*:focus {
+    outline: none;
+    border: 0px solid transparent;
+}
+
+.searchBar .searchIcon {
+    width: var(--icon-m);
+    height: var(--icon-m);
+}
+
+.searchBar .searchBtn {
+    transition: 0.3s all ease;
+}
+
+.searchBar .searchBtn:hover {
+    color: var(--main-color);
+}
+
+.searchBarContainer .closeBtn {
+    display: none;
+    width: 24px;
+    height: 24px;
+    top: 50%;
+    left: 100%;
+    border-radius: 50%;
+    border: 1px solid var(--main-text-color);
+    color: var(--main-text-color);
+    cursor: pointer;
+}
+
+.searchBarContainer.wrapped .searchBar form>*:not(:first-child) {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .searchBarContainer .closeBtn {
+        display: block;
+    }
+
+}
