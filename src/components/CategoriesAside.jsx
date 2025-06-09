@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchingGenresList } from "../utils/fetching";
-import LightButton from "./lightButton";
+import LightButton from "./LightButton";
 export default function CategoriesAside({
   onLinksClick,
   currentCategory,

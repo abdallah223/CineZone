@@ -1,7 +1,7 @@
 import SearchBar from "../SearchBar/SearchBar";
 import NavLinks from "../NavLinks/NavLinks";
 import Logo from "../Logo";
-import LightButton from "../lightButton";
+import LightButton from "../LightButton";
 import { useNavigate } from "react-router-dom";
 import { logout, getCurrentUser } from "../../utils/auth";
 import UserMenu from "../UserMenu";
