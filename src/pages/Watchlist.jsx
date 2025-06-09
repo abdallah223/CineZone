@@ -44,7 +44,6 @@ export default function Watchlist() {
           </div>
         ))}
       </div>
-      <Loader />
     </TitledSection>
   );
 }
