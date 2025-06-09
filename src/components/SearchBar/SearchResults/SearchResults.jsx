@@ -4,9 +4,13 @@ const URL = import.meta.env.VITE_API_BASE_URL;
 const IMAGEURL = import.meta.env.VITE_API_IMAGE_URL;
 const KEY = import.meta.env.VITE_API_KEY;
 import styles from "./SearchResults.module.css";
+import Loader from "../../FilmLoader";
+import { fetchingGenresList } from "../../../utils/fetching";
+import { Link } from "react-router-dom";
 
 export default function SearchResults({ query, category = "all" }) {
   const [results, setResults] = useState([]);
+  const [geners, setGenres] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -47,6 +51,7 @@ export default function SearchResults({ query, category = "all" }) {
         }
 
         const data = await response.json();
+        console.log("Search results data:", data);
         setResults(data.results.slice(0, 6));
       } catch (err) {
         if (err.name !== "AbortError") {
@@ -62,9 +67,10 @@ export default function SearchResults({ query, category = "all" }) {
 
     return () => {
       clearTimeout(timeoutId);
-      controller.abort(); // 🚫 cancel previous fetch if it’s still running
+      controller.abort();
     };
   }, [query, category]);
+
   useEffect(() => {
     if (!query || query.trim() === "") {
       setResults([]);
@@ -115,10 +121,25 @@ export default function SearchResults({ query, category = "all" }) {
     return () => clearTimeout(timeoutId);
   }, [query, category]);
 
+  useState(() => {
+    const fetchGenres = async () => {
+      try {
+        const moviesGenres = await fetchingGenresList("movie");
+        const seriesGenres = await fetchingGenresList("tv");
+        setGenres([...moviesGenres, ...seriesGenres]);
+      } catch (error) {
+        console.error("Error fetching genres:", error);
+      }
+    };
+    fetchGenres();
+  }, []);
+
   if (loading) {
     return (
       <div className={styles.searchResults}>
-        <div className={styles.loading}>Loading...</div>
+        <div className={styles.loading}>
+          <Loader />
+        </div>
       </div>
     );
   }
@@ -148,38 +169,49 @@ export default function SearchResults({ query, category = "all" }) {
       <h3 className={styles.resultsTitle}>Search Results</h3>
       <div className={styles.resultsList}>
         {results.map((item) => (
-          <div className={styles.resultItem} key={item.id}>
-            <div className={styles.posterContainer}>
-              {item.poster_path ? (
-                <img
-                  src={`https://image.tmdb.org/t/p/w92${item.poster_path}`}
-                  alt={item.title || item.name}
-                  className={styles.poster}
-                />
-              ) : (
-                <div className={styles.noPoster}>No Image</div>
-              )}
-            </div>
-            <div className={styles.itemDetails}>
-              <h4 className={styles.itemTitle}>{item.title || item.name}</h4>
-              <div className={styles.itemMeta}>
-                <span className={styles.year}>
-                  {(item.release_date || item.first_air_date || "").substring(
-                    0,
-                    4
+          <Link to={`/movie/${item.id}`}>
+            <div className={styles.resultItem} key={item.id}>
+              <div className={styles.posterContainer}>
+                {item.poster_path ? (
+                  <img
+                    src={`https://image.tmdb.org/t/p/w92${item.poster_path}`}
+                    alt={item.title || item.name}
+                    className={styles.poster}
+                  />
+                ) : (
+                  <div className={styles.noPoster}>No Image</div>
+                )}
+              </div>
+              <div className={styles.itemDetails}>
+                <h4 className={styles.itemTitle}>{item.title || item.name}</h4>
+                <div className={styles.itemMeta}>
+                  <span className={styles.year}>
+                    {(item.release_date || item.first_air_date || "").substring(
+                      0,
+                      4
+                    )}
+                  </span>
+                  <span className={styles.type}>
+                    {item.media_type === "tv" ? "TV Series" : "Movie"}
+                  </span>
+                  {item.vote_average > 0 && (
+                    <span className={styles.rating}>
+                      ★ {item.vote_average.toFixed(1)}
+                    </span>
                   )}
-                </span>
-                <span className={styles.type}>
-                  {item.media_type === "tv" ? "TV Series" : "Movie"}
-                </span>
-                {item.vote_average > 0 && (
-                  <span className={styles.rating}>
-                    ★ {item.vote_average.toFixed(1)}
+                </div>
+                {item.genre_ids && item.genre_ids.length > 0 && (
+                  <span className={styles.genres}>
+                    <span className={styles.title}>Category: </span>
+                    {item.genre_ids
+                      .map((id) => geners.find((g) => g.id === id)?.name)
+                      .filter(Boolean)
+                      .join(", ")}
                   </span>
                 )}
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
       {results.length > 0 && (

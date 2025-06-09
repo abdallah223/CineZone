@@ -1,0 +1,75 @@
+top-header {
+    padding: var(--space24-32) 0;
+    position: relative;
+    z-index: 99;
+}
+
+.header-top {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 1.5rem 0;
+    transition: 250ms ease;
+}
+
+.header-top:has(.search-box.active) {
+    visibility: hidden;
+}
+
+.header-right,
+.header-left {
+    flex: 1 0 0;
+}
+
+.header-right .user-info {
+    display: flex;
+    align-items: center;
+    color: var(--white);
+    font-size: var(--font14-16);
+}
+
+.header-right .user-info .login-btn,
+.header-right .user-info .logout-btn {
+    color: var(--white);
+}
+
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.logo {
+    width: 200px
+}
+
+.header-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+}
+
+.header .header-right .menu-button .menu .icon {
+    font-size: var(--icon-l)
+}
+
+
+.header-right .icon {
+    font-size: var(--icon-m);
+    cursor: pointer;
+}
+
+
+.menu-button.active .menu-open,
+.menu-button .menu-close {
+    display: none;
+}
+
+.menu-button .menu-open,
+.menu-button.active .menu-close {
+    display: block;
+}

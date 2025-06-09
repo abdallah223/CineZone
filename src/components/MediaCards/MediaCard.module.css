@@ -1,0 +1,161 @@
+.card {
+    position: relative;
+    max-width: 280px;
+    min-width: 190px;
+}
+
+
+.card:hover .cardDetails .title {
+    transition: none;
+}
+
+
+.card:hover .cardWrapper {
+    top: 0;
+    height: 100%;
+    opacity: 1;
+    z-index: 100;
+    transition: height 500ms ease;
+
+}
+
+.card:hover .image {
+    z-index: 2;
+}
+
+.card .image {
+    position: relative;
+    z-index: 0;
+}
+
+.card .imageContainer {
+    border-radius: var(--radius-6) var(--radius-6) 0 0;
+    position: relative;
+}
+
+
+
+.card .bookmark {
+    display: flex;
+    font-size: 26px;
+}
+
+.card .imageContainer .overlay .button.var1 {
+    display: none;
+}
+
+.card .cardDetails {
+    padding: 16px 0;
+    cursor: auto;
+}
+
+.card .cardDetails.var3 {
+    display: none;
+}
+
+.card .cardDetails .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: var(--font18-24);
+    margin-bottom: 16px;
+    transition: 250ms ease;
+}
+
+
+.card .cardDetails .title a:hover,
+.card .cardDetails .title button:hover {
+    color: var(--main-color);
+}
+
+.card .cardDetails .rows {
+    display: grid;
+    gap: 12px;
+}
+
+.card .cardDetails .row {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+    font-size: var(--font12-14);
+}
+
+.card .cardDetails .row .icon {
+    font-size: var(--desc-ts-s);
+    color: var(--main-color);
+}
+
+.card .cardDetails .row p {
+    color: var(--main-color);
+}
+
+.cardWrapper {
+    width: 100%;
+    height: 0;
+    padding: 16px;
+    overflow: hidden;
+    background: url("../images/movie-rectangle.svg") left -50% repeat-y,
+        url("../images/movie-rectangle.svg") right -50% repeat-y, rgba(0, 0, 0, 0.9);
+    background-size: 10px 12px, 10px 12px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    opacity: 0;
+    transition: height 500ms ease, opacity 500ms ease;
+}
+
+.cardWrapper.var2,
+.cardWrapper.var3 {
+    display: none;
+}
+
+.cardWrapper .title {
+    font-size: 18px;
+    margin-bottom: 16px;
+}
+
+.cardWrapper ul li:has(.genere),
+.cardWrapper ul li:has(.rate),
+.cardWrapper ul li:has(.duration),
+.cardWrapper ul li:has(.country) {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.cardWrapper ul li.overview {
+    margin: 8px 0 32px;
+    max-height: 170px;
+    font-size: var(--font12-14);
+    color: var(--secondry-text-color);
+    display: -webkit-box;
+    -webkit-line-clamp: 6;
+    line-clamp: 10;
+    -webkit-box-orient: vertical;
+    box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cardWrapper ul li:last-child .button {
+    margin: 0 auto;
+    background-color: red;
+}
+
+.card .title {
+    text-transform: capitalize;
+    font-family: var(--title-ff);
+    font-weight: 600;
+}
+
+.center {
+    margin: 0 auto;
+}
+
+.flx {
+    display: flex;
+    align-items: center;
+}

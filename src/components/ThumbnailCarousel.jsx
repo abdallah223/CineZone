@@ -1,15 +1,20 @@
 import { useEffect, useState } from "react";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
+import { Link } from "react-router-dom";
+import LargeBookmarkButton from "./LargeBookmarkButton";
 import "@splidejs/react-splide/css";
+import { setBookmarkedPropToResults } from "../utils/watchlist";
+import NoResults from "./NoResults";
 
 const KEY = import.meta.env.VITE_API_KEY;
-const imageBase = "https://image.tmdb.org/t/p/original";
+const URL = import.meta.env.VITE_API_BASE_URL;
+const IMAGEURL = import.meta.env.VITE_API_IMAGE_URL;
 
 let cachedTrendingMovies = null;
 
 const fetchTrendingMovies = async () => {
   const res = await fetch(
-    `https://api.themoviedb.org/3/trending/movie/week?api_key=${KEY}&language=en-US`
+    `${URL}trending/movie/week?api_key=${KEY}&language=en-US`
   );
   const data = await res.json();
 
@@ -19,7 +24,7 @@ const fetchTrendingMovies = async () => {
         `https://api.themoviedb.org/3/movie/${m.id}?api_key=${KEY}&language=en-US`
       ).then((res) => res.json())
     )
-  );
+  ).then((movies) => setBookmarkedPropToResults(movies));
 
   cachedTrendingMovies = detailed;
   return detailed;
@@ -46,11 +51,13 @@ const TrendingSlider = () => {
 
   if (!selectedMovie) return null;
 
-  return (
+  return movies.length === 0 ? (
+    <NoResults />
+  ) : (
     <section
       className="trending-container"
       style={{
-        backgroundImage: `url(${imageBase}${selectedMovie.poster_path})`,
+        backgroundImage: `url(${IMAGEURL}w780${selectedMovie.backdrop_path})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -67,7 +74,7 @@ const TrendingSlider = () => {
             <span>{selectedMovie.genres?.map((g) => g.name).join(", ")}</span>
             <div className="rate">
               <span className="icon">
-                <ion-icon name="star"></ion-icon>{" "}
+                <ion-icon name="star"></ion-icon>
               </span>
               <span>{selectedMovie.vote_average?.toFixed(1)} / 10</span>
             </div>
@@ -86,12 +93,10 @@ const TrendingSlider = () => {
           </div>
           <p className="overview">{selectedMovie.overview}</p>
           <div className="buttons">
-            <button className="explore">
+            <Link to={`movie/${selectedMovie.id}`} className="explore">
               Explore <ion-icon name="chevron-forward-outline"></ion-icon>
-            </button>
-            <button className="watchlist">
-              Add To Watchlist <ion-icon name="bookmark-outline"></ion-icon>
-            </button>
+            </Link>
+            <LargeBookmarkButton movie={selectedMovie} />
           </div>
         </div>
       </div>
@@ -116,7 +121,7 @@ const TrendingSlider = () => {
                   selectedMovie.id === movie.id ? "active" : ""
                 }`}
                 style={{
-                  backgroundImage: `url(${imageBase}${movie.poster_path})`,
+                  backgroundImage: `url(${IMAGEURL}w500${movie.poster_path})`,
                 }}
                 onClick={() => setSelectedMovie(movie)}
               />

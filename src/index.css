@@ -5,14 +5,18 @@
   /* colors  */
 
   --background: rgb(22, 26, 30);
-  --main-color: rgb(3, 225, 245);
-  --secondry-color: rgb(2, 153, 166);
+  --main-color: #03e1f5;
+  --secondry-color: #0299a6;
   --main-text-color: rgb(255, 255, 255);
   --secondry-text-color: rgb(255, 255, 255, 0.7);
   --overlay-color70: rgba(0, 0, 0, 0.7);
   --overlay-color80: rgba(0, 0, 0, 0.8);
   --black: rgb(0, 0, 0);
   --gray: rgb(65, 72, 81);
+  --text-muted: #bbbbbb;
+  --error-color: #ff6b6b;
+
+
 
   /* main radius value  */
   --radius-6: 6px;
@@ -142,6 +146,19 @@ body:has(.sidebar.active) {
   border-radius: var(--radius-6);
 }
 
+.hide-scrollbar {
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE/Edge */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+  /* Chrome, Safari, Opera */
+}
+
+
 [type="search"]::-webkit-search-cancel-button {
   -webkit-appearance: none;
   appearance: none;
@@ -263,6 +280,45 @@ body:has(.sidebar.active) {
     display: none;
   }
 }
+
+/* SweetAlert2 Custom Styles */
+.colored-toast.swal2-icon-success {
+  background-color: #a5dc86 !important;
+}
+
+.colored-toast .swal2-toast .swal2-success {
+  color: #fff !important;
+  border-color: #fff !important;
+}
+
+.colored-toast.swal2-icon-error {
+  background-color: #f27474 !important;
+}
+
+.colored-toast.swal2-icon-warning {
+  background-color: #f8bb86 !important;
+}
+
+.colored-toast.swal2-icon-info {
+  background-color: #3fc3ee !important;
+}
+
+.colored-toast.swal2-icon-question {
+  background-color: #87adbd !important;
+}
+
+.colored-toast .swal2-title {
+  color: white !important;
+}
+
+.colored-toast .swal2-close {
+  color: white !important;
+}
+
+.colored-toast .swal2-html-container {
+  color: white !important;
+}
+
 
 @media screen and (max-width:1023px) {
   .phone {

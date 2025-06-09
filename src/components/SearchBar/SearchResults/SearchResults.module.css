@@ -78,8 +78,8 @@
 }
 
 .itemTitle {
+    font-family: var(--title-ff);
     margin: 0 0 5px 0;
-    font-size: 14px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -88,7 +88,7 @@
 
 .itemMeta {
     display: flex;
-    font-size: 12px;
+    font-size: 14px;
     color: #999;
 }
 
@@ -104,6 +104,21 @@
 .rating {
     color:
         var(--main-color);
+}
+
+.genres {
+    color: var(--secondry-text-color);
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    margin-top: 4px;
+    gap: 4px;
+}
+
+.genres .title {
+    font-family: var(--title-ff);
+    color: var(--main-text-color);
+    font-weight: 600;
 }
 
 .loading,

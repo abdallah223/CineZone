@@ -1,0 +1,45 @@
+.userMenuContainer {
+    position: relative;
+    display: flex;
+    cursor: pointer;
+    user-select: none;
+}
+
+.userDisplay {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--white);
+}
+
+
+.userIcon {
+    font-size: var(--font20-32);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    color: var(--text-color);
+    border: 1px solid #ddd;
+    border-radius: var(--radius-6);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 6px;
+    min-width: 120px;
+    z-index: 100;
+}
+
+.dropdownItem {
+    padding: 8px 16px;
+    font-size: var(--font12-14);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.dropdown .dropdownItem :hover {
+    color: var(--main-color);
+}

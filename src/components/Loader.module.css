@@ -1,0 +1,109 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.filmStrip {
+    position: relative;
+    width: min(384px, 90vw);
+    height: min(128px, 25vw);
+    max-height: 128px;
+    background-color: var(--black);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.sprocketRow {
+    position: absolute;
+    top: 8px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.sprocketBottom {
+    top: auto;
+    bottom: 8px;
+}
+
+.sprocketHole {
+    width: min(16px, 4vw);
+    height: min(24px, 6vw);
+    max-width: 16px;
+    max-height: 24px;
+    background-color: var(--background);
+    border-radius: 2px;
+}
+
+.frameContainer {
+    position: absolute;
+    top: min(36px, 8vw);
+    bottom: min(36px, 8vw);
+    left: 0;
+    display: flex;
+    padding: 4px;
+    gap: min(4px, 1vw);
+    animation: slideFrames 3s linear infinite;
+}
+
+.frame {
+    flex-shrink: 0;
+    width: min(64px, 15vw);
+    height: 100%;
+    border-radius: 2px;
+}
+
+.loadingText {
+    margin-top: 12px;
+    text-align: center;
+}
+
+.title {
+    font-size: var(--font18-24);
+    font-weight: bold;
+    color: var(--main-color);
+    margin-bottom: 16px;
+}
+
+.dotsContainer {
+    display: flex;
+    justify-content: center;
+    gap: clamp(6px, 2vw, 8px);
+}
+
+.dot {
+    width: clamp(8px, 3vw, 12px);
+    height: clamp(8px, 3vw, 12px);
+    background-color: var(--main-color);
+    border-radius: 50%;
+    animation: bounce 1.4s ease-in-out infinite;
+}
+
+@keyframes slideFrames {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(calc(-8 * (min(64px, 15vw) + min(4px, 1vw))));
+    }
+}
+
+@keyframes bounce {
+
+    0%,
+    80%,
+    100% {
+        transform: scale(0.8);
+        opacity: 0.6;
+    }
+
+    40% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+}

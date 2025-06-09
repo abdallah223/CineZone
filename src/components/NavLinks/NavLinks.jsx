@@ -3,9 +3,9 @@ import styles from "./NavLinks.module.css";
 
 const navItems = [
   { name: "Home", path: "/" },
-  { name: "Movies", path: "/movies" },
+  { name: "Movies", path: "/movies/  " },
   { name: "Series", path: "/series" },
-  { name: "Categories", path: "/categories" },
+  { name: "Watchlist", path: "/watchlist" },
 ];
 
 const NavLinks = () => {
