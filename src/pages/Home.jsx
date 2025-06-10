@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <>
       <Header>
-        <div className="header-content">
+        <div className="header-content container">
           <div className="slogan">
             <p>
               <span>Everything</span> you need to know about entertainment.

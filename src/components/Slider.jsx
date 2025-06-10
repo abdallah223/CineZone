@@ -3,15 +3,30 @@ import { Splide, SplideSlide } from "@splidejs/react-splide";
 export default function Slider({ slideContent, data, options = {} }) {
   const defaultOptions = {
     type: "loop",
-    perPage: 5,
+    perPage: 4,
     perMove: 1,
-    gap: "1rem",
     pagination: false,
     arrows: true,
     breakpoints: {
-      640: { perPage: 1 },
-      768: { perPage: 2 },
-      1024: { perPage: 4 },
+      400: {
+        perPage: 1,
+        focus: 0,
+        gap: "1rem",
+        padding: { right: "20%", left: "0" },
+      },
+      640: { perPage: 2, focus: "center" },
+      768: {
+        perPage: 2,
+        focus: 0,
+        gap: "1rem",
+        padding: { right: "20%", left: "0" },
+      },
+      1024: {
+        perPage: 3,
+        focus: 0,
+        gap: "1rem",
+        padding: { right: "20%", left: "0" },
+      },
     },
   };
 

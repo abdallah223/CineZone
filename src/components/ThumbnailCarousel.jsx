@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { Splide, SplideSlide } from "@splidejs/react-splide";
+import Slider from "./Slider";
 import { Link } from "react-router-dom";
 import LargeBookmarkButton from "./LargeBookmarkButton";
 import "@splidejs/react-splide/css";
 import { setBookmarkedPropToResults } from "../utils/watchlist";
 import NoResults from "./NoResults";
+import { Type } from "lucide-react";
 
 const KEY = import.meta.env.VITE_API_KEY;
 const URL = import.meta.env.VITE_API_BASE_URL;
@@ -33,6 +34,7 @@ const fetchTrendingMovies = async () => {
 const TrendingSlider = () => {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
+  const [isOverviewExpanded, setIsOverviewExpanded] = useState(false);
 
   useEffect(() => {
     const init = async () => {
@@ -78,7 +80,6 @@ const TrendingSlider = () => {
               </span>
               <span>{selectedMovie.vote_average?.toFixed(1)} / 10</span>
             </div>
-
             <span className="duration">
               <span className="icon">
                 <ion-icon name="timer-outline"></ion-icon>
@@ -91,7 +92,18 @@ const TrendingSlider = () => {
               {selectedMovie.release_date?.slice(0, 4)}
             </span>
           </div>
-          <p className="overview">{selectedMovie.overview}</p>
+          <div className="overview-container">
+            <p className={`overview ${isOverviewExpanded ? "expanded" : ""}`}>
+              {selectedMovie.overview}
+            </p>
+            <button
+              className="read-more-btn toggleable"
+              onClick={() => setIsOverviewExpanded((prev) => !prev)}
+            >
+              {isOverviewExpanded ? "Show Less" : "Read More"}
+            </button>
+          </div>
+
           <div className="buttons">
             <Link to={`movie/${selectedMovie.id}`} className="explore">
               Explore <ion-icon name="chevron-forward-outline"></ion-icon>
@@ -102,32 +114,51 @@ const TrendingSlider = () => {
       </div>
 
       <div className="thumbnail-slider">
-        <Splide
+        <Slider
+          slideContent={(movie) => (
+            <div
+              className={`poster ${
+                selectedMovie.id === movie.id ? "active" : ""
+              }`}
+              style={{
+                backgroundImage: `url(${IMAGEURL}w500${movie.poster_path})`,
+              }}
+              onClick={() => {
+                setSelectedMovie(movie);
+                setIsOverviewExpanded(false); // reset overview on movie change
+              }}
+            />
+          )}
+          data={movies}
           options={{
-            perPage: 5,
+            perPage: 4,
             gap: "1rem",
+            padding: { right: "13%", left: "13%" },
+            focus: 0,
             pagination: false,
             arrows: false,
             breakpoints: {
-              768: { perPage: 3 },
-              500: { perPage: 2 },
+              400: {
+                perPage: 1,
+                focus: 0,
+                gap: "1rem",
+                padding: { right: "45%", left: "0" },
+              },
+              768: {
+                perPage: 2,
+                focus: 0,
+                gap: "1rem",
+                padding: { right: "38%", left: "0" },
+              },
+              1024: {
+                perPage: 3,
+                focus: 0,
+                gap: "1rem",
+                padding: { right: "12%", left: "12%" },
+              },
             },
           }}
-        >
-          {movies.map((movie) => (
-            <SplideSlide key={movie.id}>
-              <div
-                className={`poster ${
-                  selectedMovie.id === movie.id ? "active" : ""
-                }`}
-                style={{
-                  backgroundImage: `url(${IMAGEURL}w500${movie.poster_path})`,
-                }}
-                onClick={() => setSelectedMovie(movie)}
-              />
-            </SplideSlide>
-          ))}
-        </Splide>
+        />
       </div>
     </section>
   );

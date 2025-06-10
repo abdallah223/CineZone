@@ -1,7 +1,7 @@
 .card {
     position: relative;
     max-width: 280px;
-    min-width: 190px;
+    min-width: 250px;
 }
 
 
@@ -158,4 +158,11 @@
 .flx {
     display: flex;
     align-items: center;
+}
+
+@media screen and (max-width: 400px) {
+    .card {
+        max-width: 260px;
+    }
+
 }

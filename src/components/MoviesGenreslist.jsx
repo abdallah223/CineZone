@@ -31,9 +31,18 @@ export default function MoviesGenreslist() {
             endpoint={`https://api.themoviedb.org/3/discover/movie?api_key=${KEY}&with_genres=${genre.id}&language=en-US`}
             fetchFunction={fetchMoviesWithDetails}
             slideContent={(movie, index) => (
-              <MovieCard movie={movie} index={index} />
+              <MovieCard
+                movie={movie}
+                index={index}
+                options={{
+                  type: "slide",
+                  perPage: 5,
+                  gap: "1rem",
+                  pagination: false,
+                  arrows: false,
+                }}
+              />
             )}
-            options={{ perPage: 4 }}
           />
         </TitledSection>
       ))}

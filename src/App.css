@@ -268,6 +268,27 @@ header {
   }
 }
 
+@media screen and (max-width:400px) {
+
+  .header-content {
+    padding: 0 16px;
+  }
+
+  .poster {
+    min-width: 200px;
+    transform: scale(0.9);
+  }
+
+
+
+  .comming-soon .comming-item .soon-details {
+    margin: 0 auto;
+    text-align: center;
+  }
+
+
+}
+
 
 @media screen and (min-width:351px) and (max-width:420px) {
   .container {
@@ -275,7 +296,13 @@ header {
   }
 }
 
-@media screen and (min-width:421px) and (max-width:767px) {
+@media screen and (min-width:421px) and (max-width:768px) {
+
+
+  .poster.active {
+    transform: scale(1) !important;
+  }
+
   .container {
     padding: 0 var(--space-12-24);
   }
@@ -292,7 +319,7 @@ header {
   justify-content: space-between;
   align-items: center;
   gap: 10px;
-  margin-bottom: var(--space28-40);
+  margin: var(--space28-40) 0;
 }
 
 .section-heading .title {
@@ -422,7 +449,7 @@ header {
 
 .trending .trending-container {
   position: relative;
-  height: var(--height600-700);
+  min-height: var(--height600-700);
   padding: var(--space16-24);
   background: url("../images/film1.jpg") center center;
   background-size: cover;
@@ -487,7 +514,21 @@ header {
   overflow-y: scroll;
   font-size: var(--font14-16);
   margin-bottom: 24px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  transition: all 0.3s ease;
+  text-overflow: ellipsis;
 }
+
+.trending .trending-data .overview.expanded {
+  -webkit-line-clamp: unset;
+  overflow: visible;
+  display: block;
+}
+
+
 
 .trending .trending-data .buttons {
   display: flex;
@@ -501,7 +542,7 @@ header {
   font-size: var(--font14-16);
   border: 1px solid #fff;
   border-radius: var(--radius-6);
-  padding: var(--space8-10) var(--space12-24);
+  padding: var(--space8-18) var(--space18-28);
   text-transform: capitalize;
   cursor: pointer;
   transition: 250ms ease;
@@ -634,7 +675,7 @@ header {
 
 .card {
   position: relative;
-  max-width: 280px;
+  max-width: 290px;
   min-width: 190px;
 }
 
@@ -865,7 +906,19 @@ footer .footer-container .copy-right {
   text-align: center;
 }
 
+
 @media screen and (min-width:768px) {
+  .header-content .slogan {
+    margin: var(--space60-80) 0 24px;
+    text-align: unset;
+  }
+
+  .header-content .sub-text {
+    text-align: unset;
+    margin: 0;
+  }
+
+
   footer .footer-container .row {
     flex-direction: row;
     justify-content: space-between;
@@ -883,6 +936,12 @@ footer .footer-container .copy-right {
 
 }
 
+@media screen and (min-width:1024px) {
+  .thumbnail-slider .splide__track {
+    height: 360px;
+    padding: 30px;
+  }
+}
 
 .trending-container {
   position: relative;
@@ -890,7 +949,7 @@ footer .footer-container .copy-right {
   padding: 40px;
   max-width: 1240px;
   margin-bottom: var(--space60-80);
-  height: var(--height600-700);
+  min-height: var(--height600-700);
   padding: var(--space16-24);
   background-size: cover;
   color: white;
@@ -909,7 +968,7 @@ footer .footer-container .copy-right {
 }
 
 .trending-header .title {
-  font-size: 2.5rem;
+  font-size: var(--font24-45);
   margin-bottom: 20px;
   font-weight: 500;
 }
@@ -957,16 +1016,31 @@ footer .footer-container .copy-right {
 
 }
 
+.overview-container {
+  margin-bottom: 24px;
+  font-size: var(--font14-16);
+}
+
 .overview {
   color: var(--main-text-color);
   max-width: 600px;
   line-height: 1.6;
-  height: 100px;
   max-width: 850PX;
   overflow-y: scroll;
-  font-size: var(--font14-16);
-  margin-bottom: 24px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  transition: all 0.3s ease;
+  cursor: pointer;
 
+}
+
+.overview.expanded {
+  -webkit-line-clamp: unset;
+  overflow: visible;
+  display: block;
+  height: auto;
 }
 
 .buttons {
@@ -1035,6 +1109,7 @@ footer .footer-container .copy-right {
 
 .poster {
   width: 100%;
+  min-width: 200px;
   height: 300px;
   background-size: cover;
   background-position: center;
@@ -1045,8 +1120,8 @@ footer .footer-container .copy-right {
 }
 
 .poster.active {
-  transform: scale(1.1);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+  transform: scale(1.05) translatey(-10px);
+  box-shadow: 0 0 10px rgba(3, 225, 245, 0.7);
 }
 
 .poster:focus {
@@ -1055,6 +1130,7 @@ footer .footer-container .copy-right {
 
 .poster {
   width: 100%;
+  min-width: 200px;
   background-size: cover;
   background-position: center;
   border-radius: 8px;
@@ -1062,10 +1138,6 @@ footer .footer-container .copy-right {
   transition: transform 0.3s ease;
 }
 
-.poster.active {
-  transform: scale(0.9);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
-}
 
 
 .backdrop-overlay {
@@ -1174,6 +1246,7 @@ footer .footer-container .copy-right {
   background-size: cover;
   background-position: center;
   height: 300px;
+  min-width: 200px;
 }
 
 .movie-info {
