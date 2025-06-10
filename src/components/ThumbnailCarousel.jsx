@@ -138,7 +138,7 @@ const TrendingSlider = () => {
             pagination: false,
             arrows: false,
             breakpoints: {
-              400: {
+              450: {
                 perPage: 1,
                 focus: 0,
                 gap: "1rem",

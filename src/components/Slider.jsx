@@ -8,7 +8,7 @@ export default function Slider({ slideContent, data, options = {} }) {
     pagination: false,
     arrows: true,
     breakpoints: {
-      400: {
+      450: {
         perPage: 1,
         focus: 0,
         gap: "1rem",
