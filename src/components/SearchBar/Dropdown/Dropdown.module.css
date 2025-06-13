@@ -1,7 +1,6 @@
 /* Custom dropdown styles */
 .dropdownContainer {
     position: relative;
-    min-width: 100px;
     font-family: Arial, sans-serif;
 }
 
@@ -10,6 +9,7 @@
     border-left: 1px solid var(--main-color);
     padding: 4px 8px;
     display: flex;
+    gap: 8px;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
@@ -57,4 +57,10 @@
 
 .dropdownOption:hover {
     background-color: var(--main-color);
+}
+
+@media screen and (max-width: 1000px) {
+    .dropdownContainer {
+        min-width: 60px !important;
+    }
 }

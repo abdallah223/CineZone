@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import LargeBookmarkButton from "./LargeBookmarkButton";
 import "@splidejs/react-splide/css";
 import { setBookmarkedPropToResults } from "../utils/watchlist";
-import NoResults from "./NoResults";
-import { Type } from "lucide-react";
+import NoResults from "../components/NoResults/NoResults";
+import OverviewText from "./OverviewText";
 
 const KEY = import.meta.env.VITE_API_KEY;
 const URL = import.meta.env.VITE_API_BASE_URL;
@@ -34,7 +34,7 @@ const fetchTrendingMovies = async () => {
 const TrendingSlider = () => {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
-  const [isOverviewExpanded, setIsOverviewExpanded] = useState(false);
+  // const [isOverviewExpanded, setIsOverviewExpanded] = useState(false);
 
   useEffect(() => {
     const init = async () => {
@@ -92,7 +92,7 @@ const TrendingSlider = () => {
               {selectedMovie.release_date?.slice(0, 4)}
             </span>
           </div>
-          <div className="overview-container">
+          {/* <div className="overview-container">
             <p className={`overview ${isOverviewExpanded ? "expanded" : ""}`}>
               {selectedMovie.overview}
             </p>
@@ -102,7 +102,13 @@ const TrendingSlider = () => {
             >
               {isOverviewExpanded ? "Show Less" : "Read More"}
             </button>
-          </div>
+          </div> */}
+          <OverviewText
+            text={selectedMovie.overview}
+            collapsedHeight={40}
+            className="overview-container"
+            buttonClassName="read-more-btn toggleable"
+          />
 
           <div className="buttons">
             <Link to={`movie/${selectedMovie.id}`} className="explore">
@@ -125,7 +131,7 @@ const TrendingSlider = () => {
               }}
               onClick={() => {
                 setSelectedMovie(movie);
-                setIsOverviewExpanded(false); // reset overview on movie change
+                // setIsOverviewExpanded(false);
               }}
             />
           )}
@@ -134,7 +140,6 @@ const TrendingSlider = () => {
             perPage: 4,
             gap: "1rem",
             padding: { right: "13%", left: "13%" },
-            focus: 0,
             pagination: false,
             arrows: false,
             breakpoints: {
@@ -146,13 +151,11 @@ const TrendingSlider = () => {
               },
               768: {
                 perPage: 2,
-                focus: 0,
                 gap: "1rem",
                 padding: { right: "38%", left: "0" },
               },
               1024: {
                 perPage: 3,
-                focus: 0,
                 gap: "1rem",
                 padding: { right: "12%", left: "12%" },
               },

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { KEY, IMAGEURL } from "../utils/fetching";
 import camelcaseKeys from "camelcase-keys";
-import NoResults from "./NoResults";
+import NoResults from "./NoResults/NoResults";
 
-export default function ReviewsSection({ movieId }) {
+export default function ReviewsSection({ movieId, type = "movie" }) {
   const [reviews, setReviews] = useState([]);
   const [visibleCount, setVisibleCount] = useState(3);
   const [expanded, setExpanded] = useState({});
@@ -12,7 +12,7 @@ export default function ReviewsSection({ movieId }) {
     const getReviews = async () => {
       try {
         const response = await fetch(
-          `https://api.themoviedb.org/3/movie/${movieId}/reviews?api_key=${KEY}`
+          `https://api.themoviedb.org/3/${type}/${movieId}/reviews?api_key=${KEY}`
         );
         const apiData = await response.json();
         const data = camelcaseKeys(apiData, { deep: true });

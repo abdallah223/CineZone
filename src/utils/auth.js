@@ -44,3 +44,13 @@ export function logout() {
   localStorage.removeItem("currentUser");
   window.location.href = "/";
 }
+
+export async function getFirstName() {
+  const username = getCurrentUser();
+  if (!username) return null;
+
+  const db = await initDB();
+  const user = await db.get("users", username);
+
+  return user?.firstName || null;
+}

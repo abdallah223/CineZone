@@ -11,7 +11,7 @@ export default function SearchBar() {
   const [showResults, setShowResults] = useState(false);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 768px)");
+    const mediaQuery = window.matchMedia("(max-width: 900px)");
     const handleScreenChange = (e) => {
       setCollapsed(e.matches);
     };
@@ -100,9 +100,16 @@ export default function SearchBar() {
         </form>
       </div>
       {!collapsed && (
-        <button className={styles.closeBtn} onClick={() => setCollapsed(true)}>
-          x
-        </button>
+        <div className={styles.closeBtnContainer}>
+          <button
+            className={`${styles.closeBtn} ${styles.icon}`}
+            onClick={() => setCollapsed(true)}
+          >
+            <span className={styles.icon}>
+              <ion-icon name="close-circle-outline"></ion-icon>
+            </span>
+          </button>
+        </div>
       )}
       {showResults && <SearchResults query={query} category={category} />}
     </div>

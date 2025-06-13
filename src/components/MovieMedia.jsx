@@ -3,7 +3,7 @@ import YouTube from "react-youtube";
 import FetchedSlider from "./FetchedSlider";
 import { fetchMovieTrailers, fetchMoviePosters } from "../utils/fetching";
 
-export default function MovieMedia({ movieId }) {
+export default function MovieMedia({ movieId, type }) {
   const [activeTab, setActiveTab] = useState("trailers");
   const [loadedTabs, setLoadedTabs] = useState({
     trailers: true,
@@ -67,9 +67,10 @@ export default function MovieMedia({ movieId }) {
         >
           <FetchedSlider
             fetchFunction={fetchMovieTrailers}
+            param={[type]}
             endpoint={movieId}
             slideContent={(trailer, index) => (
-              <div key={index} style={{ height: "300px" }} className="trailer">
+              <div key={index} className="trailer">
                 <YouTube
                   videoId={trailer.key}
                   opts={{
@@ -91,8 +92,34 @@ export default function MovieMedia({ movieId }) {
             options={{
               type: "slide",
               perPage: 2,
-              arrows: true,
+              gap: "1rem",
               pagination: true,
+              breakpoints: {
+                450: {
+                  perPage: 1,
+                  focus: 0,
+                  gap: "1rem",
+                  padding: { right: "0", left: "0" },
+                },
+                640: { perPage: 1, focus: "center" },
+                768: {
+                  perPage: 1,
+                  focus: 0,
+                  gap: "1rem",
+                  padding: { right: "0", left: "0" },
+                },
+                1000: {
+                  perPage: 1,
+                  focus: 0,
+                  padding: { right: "0", left: "0" },
+                },
+                1024: {
+                  perPage: 2,
+                  focus: 0,
+                  gap: "1rem",
+                  padding: { right: "20%", left: "0" },
+                },
+              },
             }}
           />
         </div>
@@ -106,7 +133,13 @@ export default function MovieMedia({ movieId }) {
         >
           <FetchedSlider
             fetchFunction={fetchMoviePosters}
+            param={type}
             endpoint={movieId}
+            options={{
+              type: "slider",
+              perPage: 5,
+              gap: "1rem",
+            }}
             slideContent={(poster, index) => (
               <div key={index}>
                 <img

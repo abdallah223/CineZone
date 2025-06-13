@@ -3,7 +3,7 @@ import styles from "./MediaCard.module.css";
 import { Link } from "react-router-dom";
 import BookmarkButton from "./BookmarkButton";
 
-export default function SeriesCard({ movie, onloadWatchlist }) {
+export default function TvShowCard({ movie, onloadWatchlist }) {
   function formatRuntime(media) {
     const runtime =
       media.runtime ??
@@ -14,7 +14,7 @@ export default function SeriesCard({ movie, onloadWatchlist }) {
     const hours = Math.floor(runtime / 60);
     const minutes = (runtime % 60).toString().padStart(2, "0");
 
-    return `${hours}:${minutes}`;
+    return hours === 0 && minutes == 0 ? null : `${hours}h:${minutes}m`;
   }
 
   return (
@@ -39,8 +39,15 @@ export default function SeriesCard({ movie, onloadWatchlist }) {
             </li>
             <li>
               <p className={styles.genere}>
-                Genere :{" "}
-                <span>{movie.genres?.map((g) => g.name).join(", ")}</span>
+                Genere :
+                <span>
+                  {movie.genres
+                    ?.slice(0, 2)
+                    .map((g) =>
+                      g.name === "Action & Adventure" ? "Action" : g.name
+                    )
+                    .join(", ")}
+                </span>
               </p>
             </li>
             <li>
@@ -63,7 +70,7 @@ export default function SeriesCard({ movie, onloadWatchlist }) {
                   </span>
                   <span className={styles.text}>{`Avg ${formatRuntime(
                     movie
-                  )} / episode`}</span>
+                  )}`}</span>
                 </div>
               </span>
             </li>
@@ -82,7 +89,7 @@ export default function SeriesCard({ movie, onloadWatchlist }) {
             </li>
             <li>
               <Link
-                to={`/series/${movie.id}`}
+                to={`/tv-show/${movie.id}`}
                 className={`button active ${styles.center}`}
               >
                 <span className={styles.text}>View More</span>
@@ -97,7 +104,7 @@ export default function SeriesCard({ movie, onloadWatchlist }) {
       <div>
         <div className={styles.cardDetails}>
           <div className={styles.title}>
-            <Link to={`/movie/${movie.id}`}>{movie.name}</Link>
+            <Link to={`/tv-show/${movie.id}`}>{movie.name}</Link>
             {/* <button className={styles.bookmark} onClick={handleAddWatchlist}>
               <ion-icon
                 class={styles.toggleable}
@@ -115,7 +122,16 @@ export default function SeriesCard({ movie, onloadWatchlist }) {
                 <span className={styles.text}>4.8 / 5.0</span>
               </div>
               <p className={styles.geners}>
-                {movie.genres?.map((g) => g.name).join(", ")}
+                {movie.genres
+                  ?.slice(0, 2)
+                  .map((g) =>
+                    g.name === "Action & Adventure"
+                      ? "Action"
+                      : g.name === "Sci-Fi & Fantasy"
+                      ? "Fantasy"
+                      : g.name
+                  )
+                  .join(", ")}
               </p>
             </div>
             <div className={styles.row}>
@@ -124,7 +140,7 @@ export default function SeriesCard({ movie, onloadWatchlist }) {
                   <ion-icon name="timer-outline"></ion-icon>
                 </span>
                 <span className={styles.text}>
-                  {`Avg ${formatRuntime(movie)} / episode`}
+                  {formatRuntime(movie) ?? "unknown"}
                 </span>
               </div>
               <p className={styles.year}>{movie.firstAirDate?.slice(0, 4)}</p>

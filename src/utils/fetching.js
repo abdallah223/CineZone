@@ -62,10 +62,10 @@ export async function fetchMoviesWithDetails(endpoint, type = "movie", limit) {
   return detailed;
 }
 
-export async function fetchMoviePosters(id) {
+export async function fetchMoviePosters(id, type = "movie") {
   try {
     const res = await fetch(
-      `https://api.themoviedb.org/3/movie/${id}/images?api_key=${KEY}`
+      `https://api.themoviedb.org/3/${type}/${id}/images?api_key=${KEY}`
     );
     if (!res.ok) {
       throw new Error("Network response was not ok");
@@ -78,10 +78,10 @@ export async function fetchMoviePosters(id) {
     return [];
   }
 }
-export async function fetchMovieTrailers(id) {
+export async function fetchMovieTrailers(id, type = "movie") {
   try {
     const res = await fetch(
-      `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${KEY}&language=en-US`
+      `https://api.themoviedb.org/3/${type}/${id}/videos?api_key=${KEY}&language=en-US`
     );
     if (!res.ok) {
       throw new Error("Network response was not ok");

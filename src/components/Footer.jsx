@@ -1,4 +1,5 @@
 import Logo from "./Logo";
+import NavLinks from "./NavLinks/NavLinks";
 export default function Footer() {
   return (
     <footer>
@@ -16,20 +17,7 @@ export default function Footer() {
           </div>
           <div className="left">
             <h6 className="title">Links</h6>
-            <ul>
-              <li>
-                <a href="#">Home</a>
-              </li>
-              <li>
-                <a href="#">Movies</a>
-              </li>
-              <li>
-                <a href="">Tv Shows</a>
-              </li>
-              <li>
-                <a href="#">Categories</a>
-              </li>
-            </ul>
+            <NavLinks />
           </div>
         </div>
         <span className="copy-right">© 2023 by CineZone.com, Inc.</span>

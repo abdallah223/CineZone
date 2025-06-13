@@ -7,7 +7,7 @@ export default function MovieCard({ movie, onloadWatchlist }) {
   return (
     <div className={styles.card}>
       <div className={styles.imageContainer}>
-        <a href="#">
+        <Link to={`/movie/${movie.id}`}>
           <div className={styles.image}>
             <img
               src={
@@ -18,7 +18,7 @@ export default function MovieCard({ movie, onloadWatchlist }) {
               alt="Movie Poster"
             />
           </div>
-        </a>
+        </Link>
         <div className={styles.cardWrapper}>
           <ul>
             <li>
@@ -27,7 +27,12 @@ export default function MovieCard({ movie, onloadWatchlist }) {
             <li>
               <p className={styles.genere}>
                 Genere :{" "}
-                <span>{movie.genres?.map((g) => g.name).join(", ")}</span>
+                <span>
+                  {movie.genres
+                    ?.slice(0, 2)
+                    .map((g) => g.name)
+                    .join(", ")}
+                </span>
               </p>
             </li>
             <li>
@@ -107,7 +112,7 @@ export default function MovieCard({ movie, onloadWatchlist }) {
               </div>
               <p className={styles.geners}>
                 {movie.genres
-                  ?.slice(0, 3)
+                  ?.slice(0, 2)
                   .map((g) => g.name)
                   .join(", ")}
               </p>

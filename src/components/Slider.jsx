@@ -1,12 +1,13 @@
 /* eslint-disable no-unused-vars */
 import { Splide, SplideSlide } from "@splidejs/react-splide";
+import { useEffect } from "react";
 export default function Slider({ slideContent, data, options = {} }) {
   const defaultOptions = {
     type: "loop",
     perPage: 4,
     perMove: 1,
     pagination: false,
-    arrows: true,
+    arrows: data.length > 5,
     breakpoints: {
       450: {
         perPage: 1,
@@ -38,6 +39,7 @@ export default function Slider({ slideContent, data, options = {} }) {
       ...options?.breakpoints,
     },
   };
+  useEffect(() => console.log(data.length > 5, data), []);
   return (
     <Splide options={mergedOptions}>
       {data?.map((item, index) => (

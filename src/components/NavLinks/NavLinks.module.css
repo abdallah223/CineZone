@@ -6,13 +6,20 @@
     padding: 0;
 }
 
+.navList.vertical {
+    flex-direction: column;
+    gap: 16px;
+}
+
 .link {
     position: relative;
     color: var(--main-text-color);
     text-decoration: none;
+    white-space: nowrap;
     font-weight: 500;
     font-size: 16px;
     transition: color 0.3s ease;
+    display: inline-block;
 }
 
 .link::after {
@@ -37,4 +44,18 @@
 
 .active::after {
     width: 100%;
+}
+
+@media screen and (max-width: 900px) {
+    .navList.hideOnMobile {
+        display: none;
+    }
+
+
+}
+
+@media screen and (min-width: 768px) and (max-width:1240px) {
+    .navList {
+        gap: 24px;
+    }
 }

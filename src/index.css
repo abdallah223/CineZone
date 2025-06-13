@@ -27,16 +27,19 @@
   --font20-32: clamp(1.25rem, 0.971rem + 1.143vw, 2rem);
   --font24-45: clamp(1.5rem, 1.012rem + 2vw, 2.813rem);
   --font24-36: clamp(1.5rem, 1.221rem + 1.143vw, 2.25rem);
+  --font18-36: clamp(1.125rem, 0.896rem + 1.143vw, 2.25rem);
   --font14-20: clamp(0.875rem, 0.736rem + 0.571vw, 1.25rem);
   --font12-14: clamp(0.75rem, 0.661rem + 0.238vw, 0.875rem);
   --font14-16: clamp(0.875rem, 0.829rem + 0.19vw, 1rem);
   --font28-34: clamp(1.75rem, 1.482rem + 0.714vw, 2.125rem);
   --font18-24: clamp(1.125rem, 0.857rem + 0.714vw, 1.5rem);
   --font14-18: clamp(0.875rem, 0.795rem + 0.321vw, 1rem);
+  --font16-18: clamp(1rem, 0.94425rem + 0.00279vw, 1.125rem);
   --desc-ts: 0.875rem;
   --desc-ts-s: 0.75rem;
   --icon-l: 2rem;
   --icon-m: 1.4rem;
+  --icon-s: 1rem;
   --bold: 600;
 
   /* custome responsive height  */
@@ -66,7 +69,6 @@
   --text-size: 1rem;
   --icon-xl: 5rem;
   --icon-x: 2.5rem;
-  --icon-s: 0.875rem;
   --icon-xs: 0.75rem; */
 }
 

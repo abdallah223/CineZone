@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import Slider from "../components/Slider";
-import NoResults from "./NoResults";
+import NoResults from "./NoResults/NoResults";
+import DotsLoader from "./Loaders/DotsLoader"; // Make sure path is correct
 
 export default function FetchedSlider({
   fetchFunction,
   endpoint,
   slideContent,
   options = {},
+  param = [],
 }) {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -15,10 +17,11 @@ export default function FetchedSlider({
     const loadData = async () => {
       setIsLoading(true);
       try {
-        const result = await fetchFunction(endpoint);
-        setData(result);
+        const result = await fetchFunction(endpoint, ...param);
+        setData(result || []); // fallback to [] if result is undefined/null
       } catch (error) {
         console.error("Error fetching data:", error);
+        setData([]); // ensure we don't leave it undefined
       } finally {
         setIsLoading(false);
       }
@@ -27,7 +30,11 @@ export default function FetchedSlider({
     loadData();
   }, [endpoint, fetchFunction]);
 
-  if (isLoading || !data || data.length === 0) {
+  if (isLoading) {
+    return <DotsLoader />;
+  }
+
+  if (!data || data.length === 0) {
     return <NoResults />;
   }
 

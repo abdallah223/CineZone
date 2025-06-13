@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { login, signup, getCurrentUser } from "../../utils/auth";
+import { alertWithAsyncActionToast } from "../../utils/alerts";
 import { useNavigate, useLocation } from "react-router-dom";
 import styles from "./login.module.css";
 import Logo from "../../components/Logo";
+
 export default function Login() {
   const [isLogin, setIsLogin] = useState(true);
   const [formData, setFormData] = useState({
@@ -14,11 +16,11 @@ export default function Login() {
   });
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const location = useLocation();
 
+  const location = useLocation();
+  const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
 
-  const navigate = useNavigate();
   useEffect(() => {
     if (getCurrentUser()) {
       navigate("/");
@@ -55,7 +57,6 @@ export default function Login() {
       [name]: value,
     });
 
-    // Clear error for this field when user starts typing
     if (errors[name]) {
       setErrors({
         ...errors,
@@ -90,15 +91,17 @@ export default function Login() {
   const handleLogin = async () => {
     if (!validateForm()) return;
 
-    setIsLoading(true);
     try {
-      await login(formData);
+      await alertWithAsyncActionToast(() => login(formData));
       navigate(from, { replace: true });
     } catch (err) {
-      console.log(err);
-    } finally {
-      setIsLoading(false);
+      console.log(err.message);
     }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    isLogin ? handleLogin() : handleSignup();
   };
 
   const toggleForm = () => {
@@ -132,7 +135,7 @@ export default function Login() {
           </p>
         </div>
 
-        <div className={styles.form}>
+        <form className={styles.form} onSubmit={handleSubmit}>
           {!isLogin && (
             <div className={styles.nameRow}>
               <div className={styles.inputGroup}>
@@ -227,7 +230,7 @@ export default function Login() {
           </div>
 
           <button
-            onClick={isLogin ? handleLogin : handleSignup}
+            type="submit"
             disabled={isLoading}
             className={styles.primaryButton}
           >
@@ -242,26 +245,16 @@ export default function Login() {
             <span className={styles.dividerText}>or</span>
           </div>
 
-          <button onClick={toggleForm} className={styles.secondaryButton}>
+          <button
+            type="button"
+            onClick={toggleForm}
+            className={styles.secondaryButton}
+          >
             {isLogin
               ? "Don't have an account? Sign Up"
               : "Already have an account? Sign In"}
           </button>
-        </div>
-
-        <div className={styles.footer}>
-          {isLogin && (
-            <div className={styles.demoCredentials}>
-              <p className={styles.sectionTitle}>
-                <strong>Demo Credentials:</strong>
-              </p>
-              <p className={styles.infoLine}>
-                Username: <span className={styles.highlight}>demo</span> |
-                Password: <span className={styles.highlight}>password</span>
-              </p>
-            </div>
-          )}
-        </div>
+        </form>
       </div>
     </div>
   );

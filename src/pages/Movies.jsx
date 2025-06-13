@@ -2,10 +2,9 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import InfiniteScroll from "react-infinite-scroll-component";
 import CategoriesAside from "../components/CategoriesAside";
-import PageContainer from "../components/layout/PageContainer";
 import MovieCard from "../components/MediaCards/MovieCard";
 import { URL, KEY, fetchMoviesWithDetails } from "../utils/fetching";
-import Loader from "../components/FilmLoader";
+import Loader from "../components/Loaders/FilmLoader";
 
 export default function Movies() {
   const { genreId } = useParams();
@@ -50,31 +49,29 @@ export default function Movies() {
   }, [selectedGenre]);
 
   return (
-    <PageContainer>
-      <section className="movies-page layout">
-        <CategoriesAside
-          onLinksClick={handleCategoryClick}
-          currentCategory={selectedGenre}
-          type="movie"
-        />
-        <div className="movie-grid-container">
-          <InfiniteScroll
-            dataLength={movies.length}
-            next={fetchMoreMovies}
-            hasMore={hasMore}
-            loader={<Loader />}
-            endMessage={<p>No more movies to load.</p>}
-            className="hide-scrollbar"
-            style={{ height: "100vh", minHeight: "800px" }}
-          >
-            <div className="movie-grid">
-              {movies.map((movie) => (
-                <MovieCard key={movie.id} movie={movie} />
-              ))}
-            </div>
-          </InfiniteScroll>
-        </div>
-      </section>
-    </PageContainer>
+    <section className="movies-page layout">
+      <CategoriesAside
+        onLinksClick={handleCategoryClick}
+        currentCategory={selectedGenre}
+        type="movie"
+      />
+      <div className="movie-grid-container">
+        <InfiniteScroll
+          dataLength={movies.length}
+          next={fetchMoreMovies}
+          hasMore={hasMore}
+          loader={<Loader />}
+          endMessage={<p>No more movies to load.</p>}
+          className="hide-scrollbar"
+          style={{ height: "100vh", minHeight: "800px" }}
+        >
+          <div className="movie-grid">
+            {movies.map((movie) => (
+              <MovieCard key={movie.id} movie={movie} />
+            ))}
+          </div>
+        </InfiniteScroll>
+      </div>
+    </section>
   );
 }

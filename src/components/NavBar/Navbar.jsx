@@ -3,21 +3,42 @@ import NavLinks from "../NavLinks/NavLinks";
 import Logo from "../Logo";
 import LightButton from "../LightButton";
 import { useNavigate } from "react-router-dom";
-import { logout, getCurrentUser } from "../../utils/auth";
-import UserMenu from "../UserMenu";
+import { logout, getFirstName } from "../../utils/auth";
+import { confirmAction } from "../../utils/alerts";
+import UserMenu from "../UserMenu/UserMenu";
+import SidebarMenu from "../SideBar/SidebarMenu";
+import { useEffect, useState } from "react";
 
 export default function NavBar() {
-  const user = getCurrentUser();
+  const [user, setUser] = useState("");
+
   const navigate = useNavigate();
   const handleLogin = () => {
     navigate("/login");
   };
 
+  const handleLogout = async function () {
+    const confirmed = await confirmAction(
+      "Are you sure you want to log out?",
+      "This action cannot be undone.",
+      "Logout"
+    );
+    if (!confirmed) return;
+    logout();
+  };
+  useEffect(() => {
+    const getUser = async function () {
+      const user = await getFirstName();
+      setUser(user);
+    };
+    getUser();
+  });
+
   return (
     <div className="header-top">
       <div className="header-left">
         <Logo />
-        <NavLinks />
+        <NavLinks hideOnMobile />
       </div>
       <div className="header-right">
         <SearchBar />
@@ -27,23 +48,11 @@ export default function NavBar() {
           </div>
           <span className="text">Watchlist</span>
         </a>
-        <div className="menu-button">
-          <div className="menu-open menu">
-            <div className="menu-icon icon">
-              <ion-icon name="menu-outline"></ion-icon>
-            </div>
-          </div>
-          <div className="menu-close menu">
-            <div className="close-icon icon">
-              <ion-icon name="close-outline"></ion-icon>
-            </div>
-          </div>
-        </div>
         <div className="user-info">
           {user ? (
             <UserMenu
               username={user}
-              onLogout={logout}
+              onLogout={handleLogout}
               className="logout-btn"
             />
           ) : (
@@ -54,6 +63,7 @@ export default function NavBar() {
             />
           )}
         </div>
+        <SidebarMenu />
       </div>
     </div>
   );

@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { getWatchlist, removeFromWatchlist } from "../utils/watchlist";
+import { getWatchlist } from "../utils/watchlist";
 import MovieCard from "../components/MediaCards/MovieCard";
-import SeriesCard from "../components/MediaCards/SeriesCard";
+import SeriesCard from "../components/MediaCards/TvShowCard";
 import TitledSection from "../components/TitledSection";
-import Loader from "../components/FilmLoader";
 
 export default function Watchlist() {
   const [watchlist, setWatchlist] = useState([]);
@@ -17,11 +16,6 @@ export default function Watchlist() {
     loadWatchlist();
   }, []);
 
-  const handleRemove = async (id) => {
-    await removeFromWatchlist(id);
-    await loadWatchlist();
-  };
-
   return (
     <TitledSection title="Watchlist">
       <div className="movie-grid">
@@ -33,14 +27,6 @@ export default function Watchlist() {
             {movie.name && (
               <SeriesCard movie={movie} onloadWatchlist={loadWatchlist} />
             )}
-            <button
-              onClick={async () => {
-                await handleRemove(movie.id);
-                alert("Removed from watchlist!");
-              }}
-            >
-              Remove
-            </button>
           </div>
         ))}
       </div>

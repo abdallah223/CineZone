@@ -2,20 +2,20 @@ import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import CategoriesAside from "../components/CategoriesAside";
 import PageContainer from "../components/layout/PageContainer";
-import SeriesCard from "../components/MediaCards/SeriesCard";
+import TvShowCard from "../components/MediaCards/TvShowCard";
 import { KEY, fetchMoviesWithDetails } from "../utils/fetching";
 import { useParams, useNavigate } from "react-router-dom";
 
-export default function Series() {
+export default function TvShows() {
   const { genreId } = useParams();
   const navigate = useNavigate();
-  const [series, setSeries] = useState([]);
+  const [tvShows, setTvShows] = useState([]);
   const [selectedGenre, setSelectedGenre] = useState(+genreId || 10759);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const handleCategoryClick = (id) => {
     setSelectedGenre(id);
-    navigate(`/series/${id}`);
+    navigate(`/tv-shows/${id}`);
   };
   const fetchMoreSeries = async () => {
     try {
@@ -27,25 +27,25 @@ export default function Series() {
       if (data.length === 0) {
         setHasMore(false);
       } else {
-        setSeries((prevSeries) => [...prevSeries, ...data]);
+        setTvShows((prevTvShows) => [...prevTvShows, ...data]);
         setPage((prevPage) => prevPage + 1);
       }
     } catch (e) {
-      console.error("Error fetching Series:", e);
+      console.error("Error fetching TvShows:", e);
     }
   };
 
   // Reset when the genre changes
   useEffect(() => {
     const resetAndFetch = async () => {
-      setSeries([]);
+      setTvShows([]);
       setPage(1);
       setHasMore(true);
       const data = await fetchMoviesWithDetails(
         `https://api.themoviedb.org/3/discover/tv?api_key=${KEY}&with_genres=${selectedGenre}&language=en-US&page=1`,
         "tv"
       );
-      setSeries(data);
+      setTvShows(data);
       setPage(2);
     };
     resetAndFetch();
@@ -61,17 +61,17 @@ export default function Series() {
         />
         <div className="movie-grid-container">
           <InfiniteScroll
-            dataLength={series.length}
+            dataLength={tvShows.length}
             next={fetchMoreSeries}
             hasMore={hasMore}
-            loader={<h4>Loading series...</h4>}
-            endMessage={<p>No more series to load.</p>}
+            loader={<h4>Loading tv Shows...</h4>}
+            endMessage={<p>No more tv Shows to load.</p>}
             className="hide-scrollbar"
             style={{ height: "100vh", minHeight: "800px" }}
           >
             <div className="movie-grid">
-              {series.map((series) => (
-                <SeriesCard key={series.id} movie={series} />
+              {tvShows.map((tvShows) => (
+                <TvShowCard key={tvShows.id} movie={tvShows} />
               ))}
             </div>
           </InfiniteScroll>

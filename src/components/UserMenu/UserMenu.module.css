@@ -43,3 +43,18 @@
 .dropdown .dropdownItem :hover {
     color: var(--main-color);
 }
+
+
+@media screen and (max-width: 768px) {
+    .userDisplay {
+        gap: 4px;
+    }
+
+    .userDisplay .name {
+        display: none;
+    }
+}
+
+.userDisplay .forceVisible {
+    display: block !important;
+}

@@ -24,7 +24,7 @@ export default function CategoriesAside({
 
   if (isLoading) return <h4>...loading</h4>;
   return (
-    <aside className="categories">
+    <aside className="categories hide-scrollbar">
       <ul>
         {categories.map((category) => (
           <li

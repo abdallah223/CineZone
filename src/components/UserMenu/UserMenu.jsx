@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import styles from "./UserMenu.module.css";
 
-export default function UserMenu({ username, onLogout }) {
+export default function UserMenu({
+  username,
+  onLogout,
+  forceShowName = false,
+}) {
   const [open, setOpen] = useState(false);
 
   const toggleDropdown = () => setOpen(!open);
@@ -12,7 +16,13 @@ export default function UserMenu({ username, onLogout }) {
         <span className={styles.userIcon}>
           <ion-icon name="person-circle-outline"></ion-icon>
         </span>
-        <span>{username}</span>
+        <span
+          className={`${styles.name} ${
+            forceShowName ? styles.forceVisible : ""
+          }`}
+        >
+          {username}
+        </span>
         <ion-icon name="chevron-down-outline"></ion-icon>
       </div>
 

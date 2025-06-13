@@ -2,7 +2,7 @@ import styles from "./NoResults.module.css";
 export default function NoResults({
   message = "No items right now",
   icon = <ion-icon name="cloud-offline-outline"></ion-icon>,
-  subMessage = "Check back later or try adjusting your filters",
+  subMessage = "Check back later new items may be added soon.",
   className = "",
 }) {
   return (
