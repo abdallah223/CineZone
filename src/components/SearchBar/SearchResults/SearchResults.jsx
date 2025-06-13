@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
-
-const URL = import.meta.env.VITE_API_BASE_URL;
-const IMAGEURL = import.meta.env.VITE_API_IMAGE_URL;
-const KEY = import.meta.env.VITE_API_KEY;
 import styles from "./SearchResults.module.css";
 import Loader from "../../Loaders/FilmLoader";
 import { fetchingGenresList } from "../../../utils/fetching";
 import { Link } from "react-router-dom";
+const KEY = import.meta.env.VITE_API_KEY;
 
 export default function SearchResults({ query, category = "all" }) {
   const [results, setResults] = useState([]);
@@ -169,7 +166,7 @@ export default function SearchResults({ query, category = "all" }) {
       <h3 className={styles.resultsTitle}>Search Results</h3>
       <div className={styles.resultsList}>
         {results.map((item) => (
-          <Link to={`/tv-show/${item.id}`}>
+          <Link to={item.name ? "/tv-show/" : "/movie/" + item.id}>
             <div className={styles.resultItem} key={item.id}>
               <div className={styles.posterContainer}>
                 {item.poster_path ? (

@@ -851,13 +851,12 @@ footer .footer-container .row {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   gap: var(--space24-32);
 
 }
 
 footer .footer-container .row .logo {
-  width: 290px;
+  width: 200px;
   margin-bottom: 30px;
   outline: none;
   border: none;

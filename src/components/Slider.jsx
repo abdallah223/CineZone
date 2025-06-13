@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import { useEffect } from "react";
 export default function Slider({ slideContent, data, options = {} }) {

@@ -28,14 +28,6 @@ export async function getWatchlist() {
   return index.getAll(username);
 }
 
-// export async function setBookmarkedPropToResults([...results]) {
-//   const bookmarkedMovies = await getWatchlist();
-//   const bookmarkedIds = new Set(bookmarkedMovies.map((m) => m.id));
-//   return results.map((movie) => ({
-//     ...movie,
-//     bookmarked: bookmarkedIds.has(movie.id),
-//   }));
-// }
 export async function setBookmarkedPropToResults(...results) {
   const movies = results.flat();
 

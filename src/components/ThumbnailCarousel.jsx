@@ -34,7 +34,6 @@ const fetchTrendingMovies = async () => {
 const TrendingSlider = () => {
   const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null);
-  // const [isOverviewExpanded, setIsOverviewExpanded] = useState(false);
 
   useEffect(() => {
     const init = async () => {
@@ -92,17 +91,7 @@ const TrendingSlider = () => {
               {selectedMovie.release_date?.slice(0, 4)}
             </span>
           </div>
-          {/* <div className="overview-container">
-            <p className={`overview ${isOverviewExpanded ? "expanded" : ""}`}>
-              {selectedMovie.overview}
-            </p>
-            <button
-              className="read-more-btn toggleable"
-              onClick={() => setIsOverviewExpanded((prev) => !prev)}
-            >
-              {isOverviewExpanded ? "Show Less" : "Read More"}
-            </button>
-          </div> */}
+
           <OverviewText
             text={selectedMovie.overview}
             collapsedHeight={40}
@@ -131,7 +120,6 @@ const TrendingSlider = () => {
               }}
               onClick={() => {
                 setSelectedMovie(movie);
-                // setIsOverviewExpanded(false);
               }}
             />
           )}

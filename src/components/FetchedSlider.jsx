@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import Slider from "../components/Slider";
 import NoResults from "./NoResults/NoResults";
-import DotsLoader from "./Loaders/DotsLoader"; // Make sure path is correct
-
+import DotsLoader from "./Loaders/DotsLoader";
 export default function FetchedSlider({
   fetchFunction,
   endpoint,
@@ -18,16 +17,17 @@ export default function FetchedSlider({
       setIsLoading(true);
       try {
         const result = await fetchFunction(endpoint, ...param);
-        setData(result || []); // fallback to [] if result is undefined/null
+        setData(result || []);
       } catch (error) {
         console.error("Error fetching data:", error);
-        setData([]); // ensure we don't leave it undefined
+        setData([]);
       } finally {
         setIsLoading(false);
       }
     };
 
     loadData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [endpoint, fetchFunction]);
 
   if (isLoading) {

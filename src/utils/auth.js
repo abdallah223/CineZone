@@ -1,12 +1,5 @@
 import { initDB } from "./db";
 
-// export async function signup(username, password) {
-//   const db = await initDB();
-//   const existing = await db.get("users", username);
-//   if (existing) throw new Error("User already exists");
-
-//   await db.add("users", { username, password });
-// }
 export async function signup({
   username,
   password,
@@ -29,12 +22,6 @@ export async function login({ username, password }) {
   if (!user || user.password !== password) throw new Error("Invalid login");
   localStorage.setItem("currentUser", username);
 }
-// export async function login(username, password) {
-//   const db = await initDB();
-//   const user = await db.get("users", username);
-//   if (!user || user.password !== password) throw new Error("Invalid login");
-//   localStorage.setItem("currentUser", username);
-// }
 
 export function getCurrentUser() {
   return localStorage.getItem("currentUser");

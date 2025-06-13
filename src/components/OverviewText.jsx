@@ -1,8 +1,8 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const OverviewText = ({
   text,
-  collapsedHeight = 100, // in pixels
+  collapsedHeight = 100,
   className = "",
   buttonClassName = "",
   textClassName = "",
@@ -17,7 +17,6 @@ const OverviewText = ({
   useEffect(() => {
     if (!testerRef.current) return;
 
-    // Check if text overflows container height
     testerRef.current.textContent = text;
     const fullHeight = testerRef.current.scrollHeight;
 
@@ -26,8 +25,6 @@ const OverviewText = ({
       setNeedsExpansion(false);
       return;
     }
-
-    // If too tall: truncate
     setNeedsExpansion(true);
     if (!isExpanded) {
       let low = 0;
@@ -55,7 +52,6 @@ const OverviewText = ({
 
   return (
     <div className={`overview-wrapper ${className}`}>
-      {/* Hidden test element to measure text */}
       <div
         ref={testerRef}
         style={{
@@ -70,7 +66,6 @@ const OverviewText = ({
         className={textClassName}
       />
 
-      {/* Visible Text */}
       <div
         ref={containerRef}
         className={textClassName}

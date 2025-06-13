@@ -38,10 +38,9 @@ export default function SearchBar() {
     };
   }, [showResults]);
 
-  // Handle input changes
   const handleInputChange = (e) => {
     setQuery(e.target.value);
-    // Show results if there is text in the input
+
     if (e.target.value.trim()) {
       setShowResults(true);
     } else {
@@ -49,10 +48,8 @@ export default function SearchBar() {
     }
   };
 
-  // Handle category changes from dropdown
   const handleCategoryChange = (option) => {
     setCategory(option.value);
-    // If there's already a query, show updated results
     if (query.trim()) {
       setShowResults(true);
     }

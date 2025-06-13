@@ -105,12 +105,6 @@ export default function TvShowCard({ movie, onloadWatchlist }) {
         <div className={styles.cardDetails}>
           <div className={styles.title}>
             <Link to={`/tv-show/${movie.id}`}>{movie.name}</Link>
-            {/* <button className={styles.bookmark} onClick={handleAddWatchlist}>
-              <ion-icon
-                class={styles.toggleable}
-                name={bookmarked ? "bookmark" : "bookmark-outline"}
-              ></ion-icon>
-            </button> */}
             <BookmarkButton movie={movie} onloadWatchlist={onloadWatchlist} />
           </div>
           <div className={styles.rows}>

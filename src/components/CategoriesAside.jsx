@@ -20,7 +20,7 @@ export default function CategoriesAside({
         setIsLoading(false);
       }
     })();
-  }, []);
+  }, [type]);
 
   if (isLoading) return <h4>...loading</h4>;
   return (

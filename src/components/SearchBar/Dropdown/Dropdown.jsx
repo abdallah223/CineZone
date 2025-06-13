@@ -4,7 +4,6 @@ import styles from "./Dropdown.module.css";
 const Dropdown = ({ options, defaultLabel = "Select an Option", onChange }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(
-    // Find the option that matches the defaultLabel or null
     options.find((option) => option.label === defaultLabel) || null
   );
 
@@ -13,8 +12,6 @@ const Dropdown = ({ options, defaultLabel = "Select an Option", onChange }) => {
   const handleOptionClick = (option) => {
     setSelectedOption(option);
     setIsOpen(false);
-
-    // Call the onChange prop with the selected option
     if (onChange) {
       onChange(option);
     }

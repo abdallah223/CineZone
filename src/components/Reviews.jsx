@@ -24,7 +24,7 @@ export default function ReviewsSection({ movieId, type = "movie" }) {
     };
 
     getReviews();
-  }, [movieId]);
+  }, [movieId, type]);
 
   const loadMore = () => setVisibleCount((prev) => prev + 3);
   const formatDate = (isoDate) => {

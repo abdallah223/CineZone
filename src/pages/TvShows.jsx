@@ -35,7 +35,6 @@ export default function TvShows() {
     }
   };
 
-  // Reset when the genre changes
   useEffect(() => {
     const resetAndFetch = async () => {
       setTvShows([]);
