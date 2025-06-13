@@ -69,9 +69,11 @@ export default function SidebarMenu() {
           <NavLinks onLinkClick={toggleSidebar} hideOnMobile={false} vertical />
         </nav>
         <div>
-          <button className={styles.logoutBtn} onClick={handleLogout}>
-            Logout
-          </button>
+          {user !== "Guest" && (
+            <button className={styles.logoutBtn} onClick={handleLogout}>
+              Logout
+            </button>
+          )}
         </div>
         <div className={styles.footer}>
           <Logo style={{ margin: "0px" }} />
