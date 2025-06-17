@@ -42,7 +42,6 @@ export default function SearchResults({ query, category = "all" }) {
         }
 
         const response = await fetch(endpoint, { signal });
-
         if (!response.ok) {
           throw new Error("Failed to fetch results");
         }
