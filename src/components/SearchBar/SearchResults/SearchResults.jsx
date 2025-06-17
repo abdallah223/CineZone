@@ -48,7 +48,6 @@ export default function SearchResults({ query, category = "all" }) {
         }
 
         const data = await response.json();
-        console.log("Search results data:", data);
         setResults(data.results.slice(0, 6));
       } catch (err) {
         if (err.name !== "AbortError") {
@@ -166,7 +165,7 @@ export default function SearchResults({ query, category = "all" }) {
       <h3 className={styles.resultsTitle}>Search Results</h3>
       <div className={styles.resultsList}>
         {results.map((item) => (
-          <Link to={item.name ? "/tv-show/" : "/movie/" + item.id}>
+          <Link to={item.name ? "/tv-show/" + item.id : "/movie/" + item.id}>
             <div className={styles.resultItem} key={item.id}>
               <div className={styles.posterContainer}>
                 {item.poster_path ? (
